@@ -40,7 +40,7 @@ ADD Gauche-makiki /tmp/Gauche-makiki
 WORKDIR /tmp
 WORKDIR /tmp/Gauche-makiki
 RUN ./DIST gen
-RUN sh -c `gauche-config --reconfigure`
+RUN ./configure --prefix=/opt/gauche
 RUN make
 RUN make check
 RUN make install
@@ -50,7 +50,7 @@ RUN make install
 ADD Gauche-redis /tmp/Gauche-redis
 WORKDIR /tmp/Gauche-redis
 RUN ./DIST gen
-RUN sh -c `gauche-config --reconfigure`
+RUN ./configure --prefix=/opt/gauche
 RUN make
 #RUN make check
 RUN make install
@@ -60,7 +60,7 @@ RUN make install
 ADD Gauche-gl /tmp/Gauche-gl
 WORKDIR /tmp/Gauche-gl
 RUN ./DIST gen
-RUN sh -c `gauche-config --reconfigure`
+RUN ./configure --prefix=/opt/gauche
 RUN make
 RUN make check
 RUN make install
