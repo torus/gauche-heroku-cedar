@@ -6,13 +6,17 @@ appdir: docker
 docker: src
 	docker build -t gauche_heroku_app .
 
-src: Gauche Gauche-makiki Gauche-redis
+src: Gauche Gauche-makiki Gauche-redis Gauche-gl
 	cd Gauche && git pull origin master
 	cd Gauche-makiki && git pull origin master
 	cd Gauche-redis && git pull origin master
+	cd Gauche-gl && git pull origin master
 
 Gauche:
 	git clone https://github.com/shirok/Gauche.git
+
+Gauche-gl:
+	git clone https://github.com/shirok/Gauche-gl.git
 
 Gauche-makiki:
 	git clone https://github.com/shirok/Gauche-makiki.git

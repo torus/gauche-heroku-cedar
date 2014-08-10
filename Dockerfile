@@ -3,21 +3,21 @@ MAINTAINER Toru Hisai <toru@torus.jp>
 
 RUN apt-get update -y
 RUN apt-get install -y wget gcc
-RUN apt-get install -y zlib1g-dev
-RUN apt-get install -y slib
-RUN apt-get install -y make
+RUN apt-get install -y zlib1g-dev slib
+RUN apt-get install -y make autoconf
 
-# Gauche-gl
+# Gauche-gl-related packages
 
 RUN apt-get install -y freeglut3-dev libglew1.5-dev
-RUN apt-get install -y libxmu-dev
-RUN apt-get install -y libxi-dev libxext-dev libx11-dev
+RUN apt-get install -y libxmu-dev libxi-dev libxext-dev libx11-dev
+
+# Gauche released version
 
 WORKDIR /tmp
-RUN wget http://prdownloads.sourceforge.net/gauche/Gauche-0.9.3.3.tgz
-RUN tar xvfz Gauche-0.9.3.3.tgz
+RUN wget http://prdownloads.sourceforge.net/gauche/Gauche-0.9.4.tgz
+RUN tar xvfz Gauche-0.9.4.tgz
 
-WORKDIR Gauche-0.9.3.3
+WORKDIR Gauche-0.9.4
 RUN ./configure
 RUN make
 RUN make check
@@ -25,7 +25,6 @@ RUN make install
 
 # Gauche HEAD
 
-RUN apt-get install -y autoconf
 ADD Gauche /tmp/Gauche
 WORKDIR /tmp/Gauche
 RUN ./DIST gen
@@ -58,14 +57,12 @@ RUN make install
 
 # Gauche-gl
 
-ADD http://prdownloads.sourceforge.net/gauche/Gauche-gl-0.5.1.tgz /tmp/
-WORKDIR /tmp
-RUN tar xvfz Gauche-gl-0.5.1.tgz
-RUN ls -la
-WORKDIR /tmp/Gauche-gl-0.5.1
+ADD Gauche-gl /tmp/Gauche-gl
+WORKDIR /tmp/Gauche-gl
+RUN ./DIST gen
 RUN sh -c `gauche-config --reconfigure`
 RUN make
-#RUN make check
+RUN make check
 RUN make install
 
 
