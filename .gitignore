@@ -1,2 +1,5 @@
 Gauche/
 app/
+Gauche-gl/
+Gauche-makiki/
+Gauche-redis/
